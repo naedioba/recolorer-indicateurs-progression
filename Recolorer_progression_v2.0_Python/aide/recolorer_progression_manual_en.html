@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>User manual — Progress Indicator Recolorer</title>
+<style>
+:root{--navy:#0b1a3a;--navy2:#13264f;--cyan:#2fc6d6;--ink:#1c2433;--muted:#5b6780;--line:#dde3ee;--bg:#f6f8fc;--card:#fff;--code:#eef2f8}
+@media (prefers-color-scheme:dark){:root{--ink:#e8eef8;--muted:#8fa3c7;--line:#24365e;--bg:#0b1a3a;--card:#0f2147;--code:#13264f}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
+header{background:var(--navy);color:#e8eef8;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+header .t{font-size:22px;font-weight:600}header .s{color:#8fa3c7;font-size:14px}
+header a.lang{color:var(--navy);background:var(--cyan);padding:6px 14px;border-radius:4px;text-decoration:none;font-weight:600;font-size:14px}
+.wrap{display:flex;max-width:1180px;margin:0 auto;gap:32px;padding:24px 28px 60px}
+nav{flex:0 0 250px;position:sticky;top:16px;align-self:flex-start;max-height:calc(100vh - 32px);overflow:auto;font-size:14px}
+nav .h{font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:12px;margin-bottom:8px}
+nav a{display:block;color:var(--ink);text-decoration:none;padding:5px 10px;border-left:3px solid transparent}
+nav a:hover{border-left-color:var(--cyan);background:var(--card)}
+main{flex:1;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:8px 36px 36px}
+h1{display:none}h2{margin-top:36px;padding-top:8px;border-top:1px solid var(--line);font-size:22px}
+h2:first-of-type{border-top:0}
+code{background:var(--code);padding:1px 6px;border-radius:3px;font:14px Consolas,"Cascadia Mono",monospace}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--code)}strong{color:inherit}
+li{margin:4px 0}a{color:#1a8fa0}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:0 28px 30px}
+@media (max-width:820px){.wrap{flex-direction:column}nav{position:static;max-height:none;flex:none}main{padding:8px 18px 24px}}
+@media print{nav,header a.lang{display:none}main{border:0}}
+</style></head><body>
+<header><div><div class="t">User manual — Progress Indicator Recolorer</div><div class="s">Colors of progress circles and progress bars</div></div>
+<a class="lang" href="recolorer_progression_manuel_fr.html">Français</a></header>
+<div class="wrap"><nav><div class="h">Contents</div><a href="#overview">Overview</a><a href="#before-you-start">Before you start</a><a href="#installation">Installation</a><a href="#choosing-the-image-type">Choosing the image type</a><a href="#getting-to-know-the-interface">Getting to know the interface</a><a href="#choosing-colors-and-recoloring">Choosing colors and recoloring</a><a href="#progress-circles">Progress circles</a><a href="#progress-bars">Progress bars</a><a href="#how-the-program-reads-the-series">How the program reads the series</a><a href="#putting-the-images-back-into-the-display">Putting the images back into the display</a><a href="#command-line-use">Command-line use</a><a href="#troubleshooting">Troubleshooting</a><a href="#frequently-asked-questions">Frequently asked questions</a><a href="#copyright-and-contacts">Copyright and contacts</a></nav><main><h1>User manual — Progress Indicator Recolorer</h1>
+<h2 id="overview">Overview</h2>
+<p>Progress Indicator Recolorer changes the colors of a series of progress images, from 0 to 100%, while keeping exactly the same size. It handles two types of images:</p>
+<table>
+<thead><tr><th>Type</th><th>Parts recolored</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td>Progress circles</td><td>Arc (percentage), rest of the circle, center text, background</td><td>The 101 progress images of the Ender-3 V3 SE display</td></tr>
+<tr><td>Progress bars</td><td>Fill (percentage), rest of the bar, border, background</td><td>A horizontal bar with square or rounded corners</td></tr>
+</tbody>
+</table>
+<p>In both cases, the program measures the shape of the indicator on the images themselves (thickness, rounding, where the arc or fill ends), then redraws it with the new colors while keeping the edges smooth.</p>
+<p>The work takes four steps:</p>
+<ol>
+<li>Choose the image type when the program opens.</li>
+<li>Choose the image folder and the new colors, with a live preview.</li>
+<li>Recolor all the images at once.</li>
+<li>Put the images back into the display, for example with <strong>TJC TFT Tool</strong> for a <code>tjc.tft</code> file (available here: <a href="https://github.com/naedioba/TJC_TFT_Tools_Ender-3_V3_SE/releases/tag/v1.0.0_on_publish">TJC TFT Tool</a>).</li>
+</ol>
+<p>What the program does not do: it does not change the shape of the indicator, the displayed percentage or the font. It only changes colors.</p>
+<p>The interface is available in English and French.</p>
+<h2 id="before-you-start">Before you start</h2>
+<p>Always keep an untouched copy of the original images and, where relevant, of the original <code>tjc.tft</code> file: it is your safest way back.</p>
+<ul>
+<li>Put the whole series, from 0 to 100%, in a folder that contains only these images.</li>
+<li>Save the recolored images in a <strong>different folder</strong> from the originals.</li>
+<li>This software is not affiliated with Creality or TJC. It is provided without any warranty: you use it at your own risk.</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>Two versions exist: a ready-to-use Windows program (.exe), and a Python version for other systems or for changing the code.</p>
+<h3 id="windows-version-exe-recommended">Windows version (.exe) — recommended</h3>
+<p>No installation: unzip the archive and double-click <code>Recolorer progression.exe</code>. Python is not required and the manual is built into the program. The archive also contains the <code>LICENSE</code> file.</p>
+<p>On first launch, Windows SmartScreen may show "Windows protected your PC", because the program is not digitally signed. Click <strong>More info</strong>, then <strong>Run anyway</strong>.</p>
+<h3 id="python-version">Python version</h3>
+<ol>
+<li>Download Python 3 from python.org and run the installer. Be sure to tick <strong>Add python.exe to PATH</strong> before clicking Install.</li>
+<li>Open the command prompt (Windows key, type <code>cmd</code>) and check the installation with <code>python --version</code>.</li>
+<li>Install the required libraries with <code>python -m pip install pillow numpy</code>.</li>
+<li>Put all the program files in one folder.</li>
+</ol>
+<table>
+<thead><tr><th>File</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>recolorer_progression.py</code></td><td>The program to run: graphical interface and command line</td></tr>
+<tr><td><code>moteur_cercles.py</code></td><td>Circle processing</td></tr>
+<tr><td><code>moteur_barres.py</code></td><td>Bar processing</td></tr>
+<tr><td><code>aide\</code></td><td>This manual, in French and English</td></tr>
+<tr><td><code>icone.ico</code></td><td>Window icon (optional)</td></tr>
+<tr><td><code>LICENSE</code></td><td>The text of the GNU General Public License version 3</td></tr>
+</tbody>
+</table>
+<p>To open the interface, double-click <code>recolorer_progression.py</code>, or type <code>python recolorer_progression.py</code> in the command prompt from the program folder. On Windows, type <code>python</code>, not <code>python3</code>.</p>
+<h2 id="choosing-the-image-type">Choosing the image type</h2>
+<p>When it opens, the program shows two cards: <strong>Progress circles</strong> and <strong>Progress bars</strong>. Click the one that matches your images.</p>
+<p>The <strong>◀ Change type</strong> button, at the top right of the work screen, takes you back to this choice at any time. Folders and colors are then reset.</p>
+<h2 id="getting-to-know-the-interface">Getting to know the interface</h2>
+<table>
+<thead><tr><th>Area</th><th>Contents</th></tr></thead>
+<tbody>
+<tr><td>Top</td><td>Program name and chosen type; <strong>◀ Change type</strong>, <strong>Help (F1)</strong> and the <strong>FR | EN</strong> language selector</td></tr>
+<tr><td>Folders</td><td>Input folder (images to recolor) and output folder, each with a Browse… button</td></tr>
+<tr><td>Colors</td><td>One row per part of the image, with a swatch, a color code and a Choose… button</td></tr>
+<tr><td>Below the colors</td><td>Two buttons that apply a full set of colors (see the Circles and Bars sections)</td></tr>
+<tr><td>Preview</td><td>The image before and after recoloring, automatically fitted to the fixed-size area, with ◀ ▶ arrows to move between images. Side by side for circles, one above the other for bars</td></tr>
+<tr><td>Bottom</td><td>Progress bar, status message and the green <strong>Recolor all images</strong> button</td></tr>
+<tr><td>Window footer</td><td>Version, copyright, About button and contacts</td></tr>
+</tbody>
+</table>
+<p>The <strong>Help</strong> button (or the <strong>F1</strong> key) opens this manual in your browser, in the interface language. The language selector switches the whole interface instantly; your choice is remembered. On first launch, the interface uses the Windows language.</p>
+<h2 id="choosing-colors-and-recoloring">Choosing colors and recoloring</h2>
+<ol>
+<li>Under <strong>Input</strong>, click Browse… and choose the folder of the series. The program analyzes the series for a few seconds, then shows how many images were found and the preview.</li>
+<li>The <strong>Output</strong> folder is suggested automatically (folder name followed by <code>_recolored</code>). You can choose another one.</li>
+<li>For each part, pick a color: click the swatch, click <strong>Choose…</strong>, or type a code such as <code>#00FF00</code> and press Enter.</li>
+<li>Check the result in the preview, with ◀ ▶, on several percentages: 0%, 1%, 50%, 99% and 100%.</li>
+<li>Click the green <strong>Recolor all images</strong> button. A message then shows how many images were recolored and where they are.</li>
+</ol>
+<p>Recolored images keep their name, format and size; JPGs are saved at high quality. If the output folder is the same as the input folder, the program asks for confirmation before replacing the originals.</p>
+<h2 id="progress-circles">Progress circles</h2>
+<p>The program handles square images: a centered ring on a plain background, whose arc starts at the top and runs clockwise. Other images in the folder are skipped, and the status message says so. The image size and ring thickness are measured automatically.</p>
+<table>
+<thead><tr><th>Part</th><th>What it colors</th><th>Creality color</th></tr></thead>
+<tbody>
+<tr><td>Arc (percentage)</td><td>The part of the circle that grows with the percentage</td><td>Blue gradient (<code>Original</code>)</td></tr>
+<tr><td>Rest of the circle</td><td>The part of the circle not yet filled</td><td><code>#101C20</code></td></tr>
+<tr><td>Center text</td><td>The percentage written in the middle, if it is drawn on the image</td><td><code>#FFC64A</code></td></tr>
+<tr><td>Background</td><td>Everything else in the image</td><td><code>#000808</code></td></tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Original Creality colors</strong>: the original colors of the Ender-3 V3 SE display, with the blue gradient on the arc. Applied to Creality's original images, they leave them strictly unchanged.</li>
+<li><strong>Green / beige</strong>: green arc <code>#00FF00</code> and beige rest of the circle <code>#E8D6B0</code>.</li>
+</ul>
+<p>Creality's blue gradient cannot be written as a single color code: to keep it, type <code>Original</code> in the arc field (the French word <code>Origine</code> is also accepted).</p>
+<p>On the Ender-3 V3 SE, the progress images are numbers <strong>2527 to 2627</strong> in the <code>tjc.tft</code> file (2527 = 0%, 2627 = 100%), all 92 × 92 pixels. Extract them with <a href="https://github.com/naedioba/TJC_TFT_Tools_Ender-3_V3_SE/releases/tag/v1.0.0_on_publish">TJC TFT Tool</a> and copy these 101 files into a folder.</p>
+<p>The program recognizes the parts of the circle by their position, not by their color: you can start again from recolored images and go back to Creality colors. The result is very close to the originals; to get the exact images back, start from the original images.</p>
+<h2 id="progress-bars">Progress bars</h2>
+<p>The program handles images at least twice as wide as they are tall: a horizontal bar in solid colors, with square or rounded corners (up to a "pill" shape), with or without a border, whose fill starts on the left and ends with a vertical edge. Other images in the folder are skipped.</p>
+<table>
+<thead><tr><th>Part</th><th>What it colors</th></tr></thead>
+<tbody>
+<tr><td>Fill (percentage)</td><td>The part of the bar that grows with the percentage</td></tr>
+<tr><td>Rest of the bar</td><td>The part of the bar not yet filled</td></tr>
+<tr><td>Border</td><td>The outline around the bar (no effect if the bar has no border)</td></tr>
+<tr><td>Background</td><td>The outside of the bar, mostly visible in rounded corners</td></tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Original colors</strong>: the colors measured on the images of the input folder. Applied to those same images, they leave them strictly unchanged. This button first asks you to choose the folder.</li>
+<li><strong>Green / beige</strong>: green fill <code>#00FF00</code>, beige rest <code>#E8D6B0</code>, white border and black background.</li>
+</ul>
+<p>The bar shape (margins, border thickness, corner rounding) is measured once on the most filled image of the series; the color of the rest of the bar, on the least filled one. If the folder holds images of several sizes, each size is analyzed separately.</p>
+<p>Not supported: vertical bars, fills with a rounded end, strong gradients and text drawn inside the bar.</p>
+<h2 id="how-the-program-reads-the-series">How the program reads the series</h2>
+<p>At 0% and close to 100%, the indicator may show a single color, and the number is not always drawn on the image. The program then works out the percentage from the image's place in the series:</p>
+<ul>
+<li>if the file names carry numbers that run over 101 consecutive values, the first number is 0% and the last 100% (for example <code>0.png</code> to <code>100.png</code>, or <code>2527_92x92.png</code> to <code>2627_92x92.png</code>);</li>
+<li>otherwise, if the folder holds exactly 101 images, the first one (in numeric order) is 0% and the last one 100%.</li>
+</ul>
+<p>If the folder holds only part of the series, the program relies on the colors measured on the other images. The safest choice is still to keep the whole series in the same folder. Images are always listed in numeric order (2, 3… 10), not alphabetical order.</p>
+<h2 id="putting-the-images-back-into-the-display">Putting the images back into the display</h2>
+<p>For the Ender-3 V3 SE display, use <strong>TJC TFT Tool</strong> (available here: <a href="https://github.com/naedioba/TJC_TFT_Tools_Ender-3_V3_SE/releases/tag/v1.0.0_on_publish">TJC TFT Tool</a>):</p>
+<ol>
+<li>With TJC TFT Tool, rebuild the <code>tjc.tft</code> file, using the program's output folder as the image folder.</li>
+<li>Check the resulting file with TJC TFT Tool.</li>
+<li>Install it on the printer following the display update procedure.</li>
+</ol>
+<p>Solid colors usually compress better than gradients. Still, keep an eye on the remaining margin reported by TJC TFT Tool.</p>
+<h2 id="command-line-use">Command-line use</h2>
+<p>With the Python version, recoloring with the Green / beige colors also works without a window. The .exe version is used through its interface only.</p>
+<table>
+<thead><tr><th>Command</th><th>Effect</th></tr></thead>
+<tbody>
+<tr><td><code>python recolorer_progression.py</code></td><td>Opens the graphical interface</td></tr>
+<tr><td><code>python recolorer_progression.py circles folder</code></td><td>Recolors the circles into <code>folder_recolored</code></td></tr>
+<tr><td><code>python recolorer_progression.py bars folder output</code></td><td>Recolors the bars into the <code>output</code> folder</td></tr>
+<tr><td><code>python recolorer_progression.py folder</code></td><td>Guesses the type: square images → circles, landscape images → bars</td></tr>
+</tbody>
+</table>
+<p>The French words <code>cercles</code> and <code>barres</code> are also accepted. Add <code>--lang en</code> or <code>--lang fr</code> to choose the message language. If a path contains spaces, put it in quotes.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead><tr><th>Message or symptom</th><th>Cause</th><th>Solution</th></tr></thead>
+<tbody>
+<tr><td>"Windows protected your PC"</td><td>The program is not digitally signed</td><td>More info, then Run anyway</td></tr>
+<tr><td>The antivirus blocks or deletes the .exe</td><td>Common false positive for programs packaged with PyInstaller</td><td>Allow the file in your antivirus, or use the Python version</td></tr>
+<tr><td>The .exe takes a few seconds to open</td><td>It unpacks itself into memory at startup</td><td>Normal behavior</td></tr>
+<tr><td>"No circle (bar) images in this folder"</td><td>Wrong type chosen, or wrong folder</td><td>Check the folder, or click ◀ Change type</td></tr>
+<tr><td>"N image(s) skipped"</td><td>The folder contains images of another shape</td><td>Harmless; for clarity, keep only the series in the folder</td></tr>
+<tr><td>Images close to 0% or 100% get the wrong color</td><td>Incomplete series in the folder</td><td>Put the whole series (0 to 100%) in the same folder, starting from the original images</td></tr>
+<tr><td>"Original colors" shows a message</td><td>No input folder has been chosen yet</td><td>Choose the image folder first</td></tr>
+<tr><td>"Invalid color"</td><td>The code entered is not in <code>#RRGGBB</code> format</td><td>Fix the code, for example <code>#00FF00</code>, or use Choose…</td></tr>
+<tr><td>"ModuleNotFoundError"</td><td>Libraries or engine files missing (Python version)</td><td>Run <code>python -m pip install pillow numpy</code> and keep the <code>moteur_*.py</code> files next to the program</td></tr>
+<tr><td>The Help button reports a missing manual</td><td>The <code>aide</code> folder is missing (Python version)</td><td>Put the <code>aide</code> folder back next to <code>recolorer_progression.py</code></td></tr>
+</tbody>
+</table>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<p><strong>Will my colors look exactly the same on the printer's display?</strong><br />
+Almost: the display shows 65,536 colors. The difference is a few levels per channel, invisible to the eye in most cases.</p>
+<p><strong>Can I use a gradient of my own color?</strong><br />
+No. Each part takes a solid color, except the circle arc with <code>Original</code>, which keeps Creality's blue gradient.</p>
+<p><strong>Where is the chosen language stored?</strong><br />
+In the <code>recolorer_progression.json</code> file, in the <code>%APPDATA%</code> folder on Windows, or in your home folder on other systems. You can safely delete it.</p>
+<h2 id="copyright-and-contacts">Copyright and contacts</h2>
+<p>Copyright © 2026 Mamadou Bâ Neige.</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the <strong>GNU General Public License version 3</strong> (GPLv3), as published by the Free Software Foundation. It is distributed in the hope that it will be useful, but <strong>without any warranty</strong>, without even the implied warranty of merchantability or fitness for a particular purpose. The full license text is in the <code>LICENSE</code> file supplied with the software, and on <a href="https://www.gnu.org/licenses/gpl-3.0.html">gnu.org</a>.</p>
+<p>In practice, you may use, study, copy and modify the software freely. If you distribute a modified version, it must remain under the GPLv3, with its source code, and keep the copyright notice.</p>
+<table>
+<thead><tr><th>Contact</th><th>Address</th></tr></thead>
+<tbody>
+<tr><td>E-mail</td><td><a href="mailto:mamadou.ba@ugb.edu.sn">mamadou.ba@ugb.edu.sn</a></td></tr>
+<tr><td>Phone</td><td>+221 77 645 14 45</td></tr>
+<tr><td>YouTube</td><td><a href="https://www.youtube.com/@mamadoubapassioninformatique">youtube.com/@mamadoubapassioninformatique</a></td></tr>
+<tr><td>Website</td><td><a href="https://neigeba.com/">neigeba.com</a></td></tr>
+</tbody>
+</table>
+<p>This software is not affiliated with Creality or TJC (Taojingchi). Ender-3 V3 SE is a trademark of Creality.</p></main></div>
+<footer>© 2026 Mamadou Bâ Neige — GNU GPL v3 license · Version 2.0</footer></body></html>
